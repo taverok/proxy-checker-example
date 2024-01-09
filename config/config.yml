@@ -1,0 +1,3 @@
+name: demo
+server:
+  port: 8088

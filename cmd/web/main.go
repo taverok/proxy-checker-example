@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/gorilla/mux"
-	"github.com/taverok/proxy-checker-example/service/checker/config"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/gorilla/mux"
+	"github.com/taverok/proxy-checker-example/service/checker/config"
 )
 
 func main() {
@@ -21,9 +22,9 @@ func main() {
 	s := http.Server{
 		Addr:         fmt.Sprintf(":%d", cfg.Server.Port),
 		Handler:      router,
-		ReadTimeout:  30 * time.Second,
-		WriteTimeout: 30 * time.Second,
-		IdleTimeout:  30 * time.Second,
+		ReadTimeout:  time.Duration(cfg.Server.Timeout) * time.Second,
+		WriteTimeout: time.Duration(cfg.Server.Timeout) * time.Second,
+		IdleTimeout:  time.Duration(cfg.Server.Timeout) * time.Second,
 	}
 	err = s.ListenAndServe()
 	if err != nil {
@@ -31,7 +32,7 @@ func main() {
 	}
 }
 
-func Health(w http.ResponseWriter, r *http.Request) {
+func Health(w http.ResponseWriter, _ *http.Request) {
 	_, err := w.Write([]byte("OK"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

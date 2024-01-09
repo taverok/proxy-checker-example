@@ -1,14 +1,16 @@
 package config
 
 import (
-	"gopkg.in/yaml.v3"
 	"os"
+
+	"gopkg.in/yaml.v3"
 )
 
 type Config struct {
 	Name   string `yaml:"name"`
 	Server struct {
-		Port int `yaml:"port"`
+		Port    int `yaml:"port"`
+		Timeout int `yaml:"timeout"`
 	} `yaml:"server"`
 	DB struct {
 		Host string `yaml:"host"`

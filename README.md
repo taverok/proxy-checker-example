@@ -1,8 +1,11 @@
-# RUN web
+# Run web
 make run
 
-# RUN cli
+# Run cli
 go run cmd/cli/main.go -c -p optional.proxy http://mysite.com
 
-# TEST
+# Build cli
+make build-linux
+
+# Test
 make it

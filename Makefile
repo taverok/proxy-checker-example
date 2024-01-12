@@ -1,13 +1,13 @@
 run:
-	@DOMAIN_CHECK_CONFIG=config/config.yml go run cmd/main.go
+	@DOMAIN_CHECK_CONFIG=config/config.yml go run cmd/web/main.go
 
 lint:
-	golangci-lint run
+	@golangci-lint run
 
 it:
-	docker compose up -d
+	@docker compose up -d
 	@DOMAIN_CHECK_CONFIG=config/config.yml go test -count=1 -v ./...
-	docker compose down
+	@docker compose down
 
 test:
-	go test -count=1 -v -short ./...
+	@go test -count=1 -v -short ./...

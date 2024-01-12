@@ -2,3 +2,9 @@ name: demo
 server:
   port: 8088
   timeout: 5
+db:
+  host: localhost
+  port: 3311
+  name: test
+  user: test
+  pass: test

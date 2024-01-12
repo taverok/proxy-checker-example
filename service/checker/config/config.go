@@ -3,6 +3,7 @@ package config
 import (
 	"os"
 
+	"github.com/taverok/proxy-checker-example/pkg/db"
 	"gopkg.in/yaml.v3"
 )
 
@@ -12,17 +13,12 @@ type Config struct {
 		Port    int `yaml:"port"`
 		Timeout int `yaml:"timeout"`
 	} `yaml:"server"`
-	DB struct {
-		Host string `yaml:"host"`
-		User string `yaml:"user"`
-		Pass string `yaml:"pass"`
-		Port int    `yaml:"port"`
-		Name string `yaml:"name"`
-	} `yaml:"db"`
+	DB db.Datasource `yaml:"db"`
 }
 
 func NewConfig() (*Config, error) {
 	cfg := &Config{}
+	cfg.Name = "checker"
 	path := "config/config.yml"
 
 	env, ok := os.LookupEnv("DOMAIN_CHECK_CONFIG")
